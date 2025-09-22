@@ -15,7 +15,17 @@ class Customer:
     # to verify if password T or F
     def verify_pass(self, password):
         return self.password == password
-
+    
+    
+    # As a user, I want to open a savings account so that I can deposit money into my savings
+    def deposit(self, account_type, amount):
+        if account_type == 'checking' and self.checking:
+            self.checking.deposit(amount)
+        elif account_type == 'savings' and self.savings:
+            self.savings.deposit(amount)
+        else:
+            raise ValueError ('account does not exist')
+    
 
     def __str__(self):
         return (f'{self.account_id}: {self.first_name} {self.last_name}')
@@ -32,3 +42,10 @@ if __name__ == '__main__':
     # testing verify pass
     print(customer1.verify_pass('1234'))
     print(customer1.verify_pass('3214'))
+
+
+    # testing deposit method
+    customer1.deposit('checking', 100)
+    print(f'Current balance after deposit: {customer1.checking.balance}')
+    
+
