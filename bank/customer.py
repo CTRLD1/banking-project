@@ -26,10 +26,21 @@ class Customer:
         else:
             raise ValueError ('account does not exist')
     
+    # As a user, I want to open a savings account so that I can withdraw money from my savings
+    def withdraw(self, account_type, amount):
+        if account_type == 'checking' and self.checking:
+            self.checking.withdraw(amount)
+        elif account_type == 'savings' and self.savings:
+            self.savings.withdraw(amount)
+        else: 
+            raise ValueError ('account does not exist')
+
 
     def __str__(self):
         return (f'{self.account_id}: {self.first_name} {self.last_name}')
     
+
+
 
 if __name__ == '__main__':
     # this is where the user faceing "program" goes
@@ -47,5 +58,16 @@ if __name__ == '__main__':
     # testing deposit method
     customer1.deposit('checking', 100)
     print(f'Current balance after deposit: {customer1.checking.balance}')
-    
+
+
+    # testing withdraw
+    customer1.withdraw('checking', 50)
+    print(f'Current balance after withdraw: {customer1.checking.balance}')
+
+
+    # testing raised errors (customer1 does not have a savings account )
+    try:
+        customer1.deposit('savings', 200)
+    except ValueError as err:
+        print (err)
 
