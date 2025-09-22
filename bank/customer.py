@@ -11,11 +11,15 @@ class Customer:
         self.checking = Account('checking') if has_checking else None
         self.savings = Account('savings') if has_savings else None
 
+
+    # to verify if password T or F
+    def verify_pass(self, password):
+        return self.password == password
+
+
     def __str__(self):
         return (f'{self.account_id}: {self.first_name} {self.last_name}')
     
-
-
 
 if __name__ == '__main__':
     # this is where the user faceing "program" goes
@@ -23,3 +27,8 @@ if __name__ == '__main__':
     print(customer1)
     print('checking account:', customer1.checking)
     print('savings account:', customer1.savings)
+
+
+    # testing verify pass
+    print(customer1.verify_pass('1234'))
+    print(customer1.verify_pass('3214'))
