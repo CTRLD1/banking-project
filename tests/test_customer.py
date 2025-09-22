@@ -3,7 +3,7 @@ import unittest
 from bank.customer import Customer
 
 
-class TestCutomerBasic(unittest.TestCase):
+class TestCutomer(unittest.TestCase):
     def setUp(self):
         self.account1 = Customer(1021, 'Danah', 'Alsubaie', 'd1234', has_checking= True, has_savings= True)
         self.account2 = Customer(1033, 'Mishaal', 'Alddosari', '&3M456', has_checking= False, has_savings= True)
@@ -25,3 +25,8 @@ class TestCutomerBasic(unittest.TestCase):
         self.assertIsNotNone(self.account3.checking)
         self.assertEqual(self.account3.checking.balance, 0)
         self.assertIsNone(self.account3.savings)
+
+    # password verification tests
+    def test_verify_pass(self):
+        self.assertTrue(self.account1.verify_pass('d1234'))
+        self.assertFalse(self.account2.verify_pass('ssd876'))
