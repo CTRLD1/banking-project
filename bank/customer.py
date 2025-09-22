@@ -1,4 +1,4 @@
-from account import Account
+from bank.account import Account
 
 class Customer:
     def __init__(self, account_id, first_name, last_name, password, has_checking = True, has_savings = True ):
