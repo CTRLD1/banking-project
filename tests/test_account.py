@@ -41,3 +41,5 @@ class TestAccount(unittest.TestCase):
             self.account.withdraw(0)
         
         
+
+# i will test the __main__ later 
