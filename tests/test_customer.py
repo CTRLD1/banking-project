@@ -44,3 +44,21 @@ class TestCustomer(unittest.TestCase):
         with self.assertRaises(ValueError):
             # account3 does not have a savings accountt
             self.account3.deposit('savings', 100)
+
+    # withdraw tests
+    def test_withdraw_to_checking(self):
+        self.account1.deposit('checking', 400)
+        self.account1.withdraw('checking', 200)
+        # 400 - 200 = 200
+        self.assertEqual(self.account1.checking.balance, 200)
+
+    def test_withdraw_savings(self):
+        self.account1.deposit('savings', 300)
+        self.account1.withdraw('savings', 100)
+        # 300 - 100 = 200
+        self.assertEqual(self.account1.savings.balance, 200)
+
+    def test_invalid_withdraw_account(self):
+        with self.assertRaises(ValueError):
+            # account2 does not have a checking account
+            self.account2.withdraw('checking', 30)
