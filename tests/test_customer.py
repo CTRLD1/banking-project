@@ -3,7 +3,7 @@ import unittest
 from bank.customer import Customer
 
 
-class TestCutomer(unittest.TestCase):
+class TestCustomer(unittest.TestCase):
     def setUp(self):
         self.account1 = Customer(1021, 'Danah', 'Alsubaie', 'd1234', has_checking= True, has_savings= True)
         self.account2 = Customer(1033, 'Mishaal', 'Alddosari', '&3M456', has_checking= False, has_savings= True)
@@ -30,3 +30,17 @@ class TestCutomer(unittest.TestCase):
     def test_verify_pass(self):
         self.assertTrue(self.account1.verify_pass('d1234'))
         self.assertFalse(self.account2.verify_pass('ssd876'))
+
+    # deposit tests
+    def test_deposit_to_checking(self):
+        self.account1.deposit('checking', 300)
+        self.assertEqual(self.account1.checking.balance, 300)
+
+    def test_deposit_savings(self):
+        self.account1.deposit('savings', 100)
+        self.assertEqual(self.account1.savings.balance, 100)
+
+    def test_invalid_deposit_account(self):
+        with self.assertRaises(ValueError):
+            # account3 does not have a savings accountt
+            self.account3.deposit('savings', 100)
