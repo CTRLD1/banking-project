@@ -34,6 +34,18 @@ class Customer:
             self.savings.withdraw(amount)
         else: 
             raise ValueError ('account does not exist')
+        
+
+    def transfer_personal_accounts(self, from_type, to_type, amount):
+        # transfer from checking to savings and the opposite
+        if from_type == 'checking' and self.checking and self.savings:
+            self.checking.withdraw(amount)
+            self.savings.deposit(amount)
+        elif from_type == 'savings' and self.checking and self.savings:
+            self.savings.withdraw(amount)
+            self.savings.deposit(amount)
+        else:
+            raise ValueError('invalid transfer')
 
 
     def __str__(self):
@@ -70,4 +82,29 @@ if __name__ == '__main__':
         customer1.deposit('savings', 200)
     except ValueError as err:
         print (err)
+
+
+    # testing transfer method
+    customer2= Customer(1035, 'Sami', 'Alsubaie', '7678s', has_checking= True, has_savings= True)
+    print(customer2)
+    # print('checking account:', customer2.checking)
+    # print('savings account:', customer2.savings)
+
+    customer2.deposit('checking', 1000)
+    print(f'Current checking balance: {customer2.checking.balance}')
+
+    customer2.deposit('savings', 500)
+    print(f'Current savings balance: {customer2.savings.balance}')
+
+    customer2.transfer_personal_accounts('checking', 'savings', 150)
+    print ('checking AFTER transfer: ', customer2.checking.balance)
+    print('savings AFTER transfer: ', customer2.savings.balance)
+
+
+
+
+
+
+
+    
 

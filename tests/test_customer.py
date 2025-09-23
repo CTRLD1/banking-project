@@ -52,7 +52,7 @@ class TestCustomer(unittest.TestCase):
         # 400 - 200 = 200
         self.assertEqual(self.account1.checking.balance, 200)
 
-    def test_withdraw_savings(self):
+    def test_withdraw_from_savings(self):
         self.account1.deposit('savings', 300)
         self.account1.withdraw('savings', 100)
         # 300 - 100 = 200
