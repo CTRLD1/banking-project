@@ -62,3 +62,16 @@ class TestCustomer(unittest.TestCase):
         with self.assertRaises(ValueError):
             # account2 does not have a checking account
             self.account2.withdraw('checking', 30)
+
+
+    # transfer tests
+    def test_transfer_from_checking_to_savings(self):
+        self.account1.deposit('checking', 2000)
+        self.account1.deposit('savings', 500)
+
+        # fromm checking to savings
+        self.account1.transfer_personal_accounts('checking', 'savings', 300)
+        # 2000 - 300 = 1700
+        self.assertEqual(self.account1.checking.balance, 1700)
+        # 500 + 300 = 800
+        self.assertEqual(self.account1.savings.balance, 800)
