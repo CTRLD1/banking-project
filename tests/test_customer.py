@@ -87,3 +87,8 @@ class TestCustomer(unittest.TestCase):
         # 500 + 100 =600
         self.assertEqual(self.customer1.checking.balance, 600)
 
+    
+    def test_invalid_transfer(self):
+        with self.assertRaises(ValueError):
+            # customer1 does not have 'emergency account' only has 2 accounts: checking & savings
+            self.customer1.transfer_personal_accounts('checking', 'emergency account', 50)
