@@ -55,6 +55,24 @@ class BankSystem:
                             new_customer.checking.balance if new_customer.checking else 0,
                             new_customer.savings.balance if new_customer.savings else 0])
         return new_customer
+    
+
+    # Login method
+    def login(self, account_id, password):
+        for c in self.customers:
+            if c.account_id  == account_id and c.verify_pass(password):
+             return c
+        return None
+    
+    # Deposit Money into Account (required login) 
+    def deposit(self, account_id, password, account_type, amount):
+        customer = self.login(account_id, password)
+        if customer:
+            customer.deposit(account_type, amount)
+            self.update_csv()
+            return customer
+        else:
+            raise ValueError('Invalid login')
 
 
 
@@ -62,4 +80,18 @@ class BankSystem:
 
 if __name__ == '__main__':
     bank = BankSystem('bank.csv')
-    bank.add_customer('Danah', 'Alsubaie', 'd1234')
+    # bank.add_customer('Danah', 'Alsubaie', 'd1234')
+
+    # Testing login method
+    customer = bank.login(10001, 'juagw362')
+    if customer:
+        print('login succesful:')
+    else:
+        print('invalid login')
+
+    #Testing login (deposit) method 
+    try:
+        update_customer = bank.deposit(10001, 'juagw362', 'checking', 500)
+        print(f'deposit succcesful, updated checking balance: {update_customer.checking.balance}')
+    except ValueError as err:
+        print('Error: ',err)
