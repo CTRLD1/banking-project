@@ -7,7 +7,7 @@ class BankSystem:
         self.customers = self.load_customers()
 
     def load_customers(self):
-        custmers = []
+        customers = []
         with open(self.file_path, 'r') as f:
             reader = csv.DictReader(f)
             for row in reader:
@@ -21,5 +21,28 @@ class BankSystem:
                 )
                 c.checking.balance = float(row['balance_checking'])
                 c.savings.balance= float(row['balance_savings'])
-                custmers.append(c)
-        return custmers
+                customers.append(c)
+        return customers
+    
+    # add_customer method
+    def add_customer(self, frst_name, last_name, password, save_to_file=True):
+        new_account_id = max(c.account_id for c in self.customers) + 1 if self.customers else 10001
+
+        new_customer = Customer(new_account_id, frst_name, last_name, password, has_checking=True, has_savings=True)
+
+        self.customers.append(new_customer)
+        if save_to_file:
+            with open(self.file_path, 'a', newline='') as f:
+                 writer = csv.writer(f)
+                 writer.writerow([new_customer.account_id, new_customer.frst_name, new_customer.last_name, new_customer.password,
+                            new_customer.checking.balance if new_customer.checking else 0,
+                            new_customer.savings.balance if new_customer.savings else 0])
+        return new_customer
+    
+
+
+
+
+# if __name__ == '__main__':
+    # bank = BankSystem('bank.csv')
+    # bank.add_customer('Danah', 'Alsubaie', 'd1234')
