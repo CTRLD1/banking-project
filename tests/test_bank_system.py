@@ -25,7 +25,8 @@ class TestBankSystem(unittest.TestCase):
         self.assertEqual(customers[0].last_name, 'sigera')
         self.assertEqual(customers[0].checking.balance, 1000)
         self.assertEqual(customers[0].savings.balance, 10000)
-    
+
+    # testing add customer methood
     def test_add_customer(self):
         start_count = len(self.bank.customers)
         new_customer = self.bank.add_customer('Danah', 'Alsubaie', 'd1234', save_to_file=True)
