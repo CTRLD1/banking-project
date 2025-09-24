@@ -1,9 +1,9 @@
 from bank.account import Account
 
 class Customer:
-    def __init__(self, account_id, first_name, last_name, password, has_checking = True, has_savings = True ):
+    def __init__(self, account_id, frst_name, last_name, password, has_checking = True, has_savings = True ):
         self.account_id = account_id
-        self.first_name = first_name
+        self.frst_name = frst_name
         self.last_name = last_name
         self.password = password
 
@@ -49,7 +49,7 @@ class Customer:
 
 
     def __str__(self):
-        return (f'{self.account_id}: {self.first_name} {self.last_name}')
+        return (f'{self.account_id}: {self.frst_name} {self.last_name}')
     
 
 
