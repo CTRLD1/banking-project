@@ -15,7 +15,6 @@ class TestBankSystem(unittest.TestCase):
     def tearDown(self):
         if os.path.exists('test_bank.csv'):
             os.remove('test_bank.csv')
-        pass
         
     
     def test_load_customers(self):
@@ -39,7 +38,24 @@ class TestBankSystem(unittest.TestCase):
         with open('test_bank.csv', 'r') as f:
             lines = f.readlines()
             last_line = lines[-1].strip()
-            print('last line', last_line)
+            # print('last line', last_line)
 
         self.assertIn('Danah', last_line)
         self.assertIn('Alsubaie', last_line)
+
+
+    # testing Login method
+    def test_login_success(self):
+        customer = self.bank.login(10002, 'idh36%@#FGd')
+        self.assertIsNotNone(customer)
+        self.assertEqual(customer.frst_name, 'james')
+
+    def test_invalid_login(self):
+        customer = self.bank.login(10002, 'xxoooo3')
+        self.assertIsNone(customer)
+
+    # testing deposit (required login)
+    def test_deposit_success(self):
+        # 10000 + 200 = 10200
+        customer = self.bank.deposit(10002,'idh36%@#FGd', 'checking', 200) 
+        self.assertEqual(customer.checking.balance, 10200)
