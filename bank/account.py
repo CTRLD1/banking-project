@@ -76,7 +76,7 @@ if __name__ == '__main__':
         # 0 - 50 = -50
         # overdraft fee: 35
         # -50 - 35 = -85
-        account2.overdraft_protect(100)
+        account2.overdraft_protect(50)
         print(f'balance AFTER first overdraft: {account2.balance}')
     except ValueError as err:
         print(err)
