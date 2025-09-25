@@ -83,6 +83,23 @@ class BankSystem:
             return customer
         else:
             raise ValueError('Invalid login')
+        
+    # Transfer Money Between Accounts (required login)
+    def transfer_between_useres(self, sender_id, sender_pass, sender_type, receiver_id, receiver_type, amount):
+        sender = self.login(sender_id, sender_pass)
+        receiver = None
+        for c in self.customers:
+            if c.account_id == receiver_id:
+                receiver = c
+                break 
+        if sender and receiver:
+            sender.withdraw(sender_type, amount)
+            receiver.deposit(receiver_type, amount)
+            self.update_csv()
+        else:
+            raise ValueError('Invalid transfer, login failed or receiver not found')
+
+
 
 
 
@@ -106,11 +123,15 @@ if __name__ == '__main__':
     #     print('Error: ',err)
 
     # Testing login (withdraw) method, worked!
-    try:
-        update_customer = bank.withdraw(10002, 'idh36%@#FGd', 'checking', 100)
-        print(f'withdraw succcesful, updated checking balance: {update_customer.checking.balance}')
-    except ValueError as err:
-        print('Error: ',err)
+    # try:
+    #     update_customer = bank.withdraw(10002, 'idh36%@#FGd', 'checking', 100)
+    #     print(f'withdraw succcesful, updated checking balance: {update_customer.checking.balance}')
+    # except ValueError as err:
+    #     print('Error: ',err )
 
 
-
+    #Testing transfer between useres 10005 and 10006
+    bank.transfer_between_useres(sender_id=10005, sender_pass='d^dg23g)@', sender_type='checking',
+                                 receiver_id=10006, receiver_type='savings', amount= 1000
+                                 )
+    print('Transfer successful')
