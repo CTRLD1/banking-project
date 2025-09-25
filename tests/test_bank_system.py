@@ -63,3 +63,11 @@ class TestBankSystem(unittest.TestCase):
     def test_deposit_invalid(self):
         with self.assertRaises(ValueError):
             self.bank.deposit(10001, '123546', 'checking', 200)
+
+    # testing withdraw (required login)
+    def test_withdraw_success(self):
+        # 9800 - 100 = 9700
+        customer = self.bank.withdraw(10002,'idh36%@#FGd', 'checking', 100) 
+        self.assertEqual(customer.checking.balance, 9700)
+
+    
