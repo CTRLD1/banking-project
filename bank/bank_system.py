@@ -73,7 +73,16 @@ class BankSystem:
             return customer
         else:
             raise ValueError('Invalid login')
-
+        
+    # Withdraw Money from Account (required login)
+    def withdraw(self, account_id, password, account_type, amount):
+        customer = self.login(account_id, password)
+        if customer:
+            customer.withdraw(account_type, amount)
+            self.update_csv()
+            return customer
+        else:
+            raise ValueError('Invalid login')
 
 
 
@@ -89,9 +98,19 @@ if __name__ == '__main__':
     else:
         print('invalid login')
 
-    #Testing login (deposit) method 
+    #Testing login (deposit) method, worked!
+    # try:
+    #     update_customer = bank.deposit(10001, 'juagw362', 'checking', 500)
+    #     print(f'deposit succcesful, updated checking balance: {update_customer.checking.balance}')
+    # except ValueError as err:
+    #     print('Error: ',err)
+
+    # Testing login (withdraw) method, worked!
     try:
-        update_customer = bank.deposit(10001, 'juagw362', 'checking', 500)
-        print(f'deposit succcesful, updated checking balance: {update_customer.checking.balance}')
+        update_customer = bank.withdraw(10002, 'idh36%@#FGd', 'checking', 100)
+        print(f'withdraw succcesful, updated checking balance: {update_customer.checking.balance}')
     except ValueError as err:
         print('Error: ',err)
+
+
+

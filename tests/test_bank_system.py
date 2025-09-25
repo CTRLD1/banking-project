@@ -59,3 +59,7 @@ class TestBankSystem(unittest.TestCase):
         # 10000 + 200 = 10200
         customer = self.bank.deposit(10002,'idh36%@#FGd', 'checking', 200) 
         self.assertEqual(customer.checking.balance, 10200)
+
+    def test_deposit_invalid(self):
+        with self.assertRaises(ValueError):
+            self.bank.deposit(10001, '123546', 'checking', 200)
