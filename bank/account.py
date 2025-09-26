@@ -16,11 +16,13 @@ class Account:
 
 
     def withdraw(self, amount: float):
-        if amount <= 0:
-            raise ValueError('amount must be positive')
-        if amount > self.balance:
-            raise ValueError('credit is insufficent')
-        self.balance -= amount
+        # if amount <= 0:
+        #     raise ValueError('amount must be positive')
+        # if amount > self.balance:
+        #     raise ValueError('credit is insufficent')
+        # self.balance -= amount
+
+        self.overdraft_protect(amount)
 
 
     def overdraft_protect(self, amount: float):
