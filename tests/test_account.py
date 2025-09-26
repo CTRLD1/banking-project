@@ -78,3 +78,7 @@ class TestAccount(unittest.TestCase):
         account2.overdraft_protect(50)
         with self.assertRaises(ValueError):
             account2.overdraft_protect(150)
+
+
+if __name__ == '__main__':
+    unittest.main()

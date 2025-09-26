@@ -99,12 +99,3 @@ if __name__ == '__main__':
     customer2.transfer_personal_accounts('checking', 'savings', 150)
     print ('checking AFTER transfer: ', customer2.checking.balance)
     print('savings AFTER transfer: ', customer2.savings.balance)
-
-
-
-
-
-
-
-    
-

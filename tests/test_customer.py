@@ -86,9 +86,21 @@ class TestCustomer(unittest.TestCase):
         self.assertEqual(self.customer1.savings.balance, 900)
         # 500 + 100 =600
         self.assertEqual(self.customer1.checking.balance, 600)
-
     
     def test_invalid_transfer(self):
         with self.assertRaises(ValueError):
             # customer1 does not have 'emergency account' only has 2 accounts: checking & savings
             self.customer1.transfer_personal_accounts('checking', 'emergency account', 50)
+
+
+    # Overdraft tests 
+    def test_if_overdraft_fee_applied_on_checking(self):
+        self.customer3.checking.overdraft_protect(50)
+        # 0 - 50 -35 = -85
+        self.assertEqual(self.customer3.checking.balance, -85)
+        self.assertEqual(self.customer3.checking.overdraft_times, 1)
+        self.assertTrue(self.customer3.checking.is_active)
+
+
+if __name__ == '__main__':
+    unittest.main()
