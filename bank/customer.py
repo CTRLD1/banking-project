@@ -14,7 +14,7 @@ class Customer:
 
     # to verify if password T or F
     def verify_pass(self, password):
-        return self.password == password
+        return self.password.strip() == password.strip()
     
     
     # As a user, I want to open a savings account so that I can deposit money into my savings
@@ -35,7 +35,7 @@ class Customer:
         else: 
             raise ValueError ('account does not exist')
         
-
+    # Transfer Money Between Accounts (required login)
     def transfer_personal_accounts(self, from_type, to_type, amount):
         # transfer from checking to savings and the opposite
         if from_type == 'checking' and to_type == 'savings' and self.checking and self.savings:

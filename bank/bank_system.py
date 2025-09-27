@@ -13,9 +13,9 @@ class BankSystem:
             for row in reader:
                 c = Customer(
                     int(row['account_id']),
-                    row['frst_name'],
-                    row['last_name'],
-                    row['password'],
+                    row['frst_name'].strip(),
+                    row['last_name'].strip(),
+                    row['password'].strip(),
                     has_checking=True,
                     has_savings=True,
                 )
@@ -57,12 +57,16 @@ class BankSystem:
                  writer = csv.writer(f)
                  writer.writerow([new_customer.account_id, new_customer.frst_name, new_customer.last_name, new_customer.password,
                             new_customer.checking.balance if new_customer.checking else 0,
-                            new_customer.savings.balance if new_customer.savings else 0])
+                            new_customer.savings.balance if new_customer.savings else 0,
+                            'active' if new_customer.checking and new_customer.checking.is_active else 'inactive',
+                            'active' if new_customer.savings and new_customer.savings.is_active else 'inactive',])
         return new_customer
     
 
     # Login method
     def login(self, account_id, password):
+        account_id = int(account_id)
+        password = password.strip()
         for c in self.customers:
             if c.account_id  == account_id and c.verify_pass(password):
              return c
@@ -88,7 +92,7 @@ class BankSystem:
         else:
             raise ValueError('Invalid login')
         
-    # Transfer Money Between Accounts (required login)
+    # Transfer Money Between Users (required login)
     def transfer_between_useres(self, sender_id, sender_pass, sender_type, receiver_id, receiver_type, amount):
         sender = self.login(sender_id, sender_pass)
         receiver = None
@@ -135,7 +139,7 @@ if __name__ == '__main__':
 
 
     #Testing transfer between useres 10005 and 10006
-    bank.transfer_between_useres(sender_id=10005, sender_pass='d^dg23g)@', sender_type='checking',
-                                 receiver_id=10006, receiver_type='savings', amount= 1000
-                                 )
-    print('Transfer successful')
+    # bank.transfer_between_useres(sender_id=10005, sender_pass='d^dg23g)@', sender_type='checking',
+    #                              receiver_id=10006, receiver_type='savings', amount= 1000
+    #                              )
+    # print('Transfer successful')
