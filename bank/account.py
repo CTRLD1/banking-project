@@ -5,6 +5,7 @@ class Account:
         self.overdraft_times = 0
         self.is_active = True
 
+    # sources: docs.python & geeksforgeeks.org
     @property
     def status(self):
         return 'active' if self.is_active else 'inactive'
@@ -20,12 +21,6 @@ class Account:
 
 
     def withdraw(self, amount: float):
-        # if amount <= 0:
-        #     raise ValueError('amount must be positive')
-        # if amount > self.balance:
-        #     raise ValueError('credit is insufficent')
-        # self.balance -= amount
-
         self.overdraft_protect(amount)
 
 

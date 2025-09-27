@@ -4,11 +4,10 @@ import os
 
 from bank.bank_system import BankSystem
 
-
+# i created this temporary 'test_bank.csv' file for testing and to keep my original 'bank.csv' clean
+# shutil & os source: docs.py 
 class TestBankSystem(unittest.TestCase):
     def setUp(self):
-        # George: Option 1:Use a seperate csv file for testing delete or overwrite it in the teardown method google 'how to delete file python'
-        # i created this temporary 'test_bank.csv' file for testing and to keep my original 'bank.csv' clean
         shutil.copyfile('bank.csv', 'test_bank.csv')
         self.bank = BankSystem('test_bank.csv')
         

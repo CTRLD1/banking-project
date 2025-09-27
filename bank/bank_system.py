@@ -5,7 +5,8 @@ class BankSystem:
     def __init__(self, file_path='bank.csv'):
         self.file_path = file_path
         self.customers = self.load_customers()
-
+    
+    # dictReader source:https://docs.python.org/3/library/csv.html
     def load_customers(self):
         customers = []
         with open(self.file_path, 'r') as f:
@@ -106,9 +107,6 @@ class BankSystem:
             self.update_csv()
         else:
             raise ValueError('Invalid transfer, login failed or receiver not found')
-
-
-
 
 
 

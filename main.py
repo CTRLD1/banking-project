@@ -1,16 +1,18 @@
 from bank.bank_system import BankSystem
 from termcolor import colored
 
+# sources:pypi.org & youtube toturial
+
 def main():
     bank = BankSystem('bank.csv')
-    print(colored('==Welcome to my ACME Bank!==', 'green', ['blink']))
+    print(colored('==Welcome to my ACME Bank!==', 'green'))
 
     while True:
         print(colored('---Menu---', 'light_grey'))
         print(colored('1- Add new customer', 'light_magenta'))
         print(colored('2- Make a deposit', 'blue'))
         print(colored('3- Make a withdraw', 'light_cyan'))
-        print(colored('4- Tansfer btween users', 'light_green'))
+        print(colored('4- Tansfer btween users', 'green'))
         print(colored('5- Transfer between personal accounts', 'grey'))
         print(colored('6- Logout', 'red'))
 
