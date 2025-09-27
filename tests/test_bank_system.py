@@ -88,6 +88,21 @@ class TestBankSystem(unittest.TestCase):
         # 1000 + 1000 = 2000
         self.assertEqual(receiver.savings.balance, 2000)
 
+    # testing the activity status feature
+    def test_customer_account_csv_status(self):
+        new_customer = self.bank.add_customer(10007, 'sara', '123', save_to_file = True)
+        new_customer.checking.overdraft_protect(40)
+        self.assertTrue(new_customer.checking.is_active)
+        new_customer.checking.overdraft_protect(10)
+        self.assertFalse(new_customer.checking.is_active)
+        self.bank.update_csv()
+        
+        new_bank = BankSystem('test_bank.csv')
+        loaded_customer = new_bank.login(new_customer.account_id, '123')
+        self.assertFalse(loaded_customer.checking.is_active)
+
+
+
 
 if __name__ == '__main__':
     unittest.main()

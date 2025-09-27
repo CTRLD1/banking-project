@@ -5,6 +5,10 @@ class Account:
         self.overdraft_times = 0
         self.is_active = True
 
+    @property
+    def status(self):
+        return 'active' if self.is_active else 'inactive'
+
     def deposit(self, amount: float):
         if amount <= 0:
             raise ValueError('amount must be positive')

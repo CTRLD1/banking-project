@@ -21,6 +21,8 @@ class BankSystem:
                 )
                 c.checking.balance = float(row['balance_checking'])
                 c.savings.balance= float(row['balance_savings'])
+                c.checking.is_active = row.get('status_checking', 'active') == 'active'
+                c.savings.is_active = row.get('status_savings', 'active') == 'active'
                 customers.append(c)
         return customers
     
@@ -28,7 +30,7 @@ class BankSystem:
         with open(self.file_path, 'w', newline='') as f:
             writer = csv.writer(f)
 
-            writer.writerow(['account_id', 'frst_name', 'last_name', 'password', 'balance_checking', 'balance_savings'])
+            writer.writerow(['account_id', 'frst_name', 'last_name', 'password', 'balance_checking', 'balance_savings', 'status_checking', 'status_savings'])
 
             for c in self.customers:
                 writer.writerow([
@@ -38,6 +40,8 @@ class BankSystem:
                     c.password,
                     c.checking.balance if c.checking else 0,
                     c.savings.balance if c.savings else 0,
+                    'active' if c.checking and c.checking.is_active else 'inactive',
+                    'active' if c.savings and c.savings.is_active else 'inactive',
                 ])
 
 
