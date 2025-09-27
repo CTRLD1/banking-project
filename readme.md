@@ -2,11 +2,11 @@
 
 ## Overview
 This project is a simple banking system built with python. It allows users to:
-💸 Create accounts (checking or savings or BOTH)
-💸 Deposit and withdraw money
-💸 Transfer between personal accounts 
-💸 Transfer between different users
-💸 Automatically update the data in a CSV file
+- 💸 Create accounts (checking or savings or BOTH)
+- 💸 Deposit and withdraw money
+- 💸 Transfer between personal accounts 
+- 💸 Transfer between different users
+- 💸 Automatically update the data in a CSV file
 
 
 ## Exaample of code
@@ -33,10 +33,10 @@ def update_csv(self):
 
 
  ## What i learned
- 📝 How to use OOP in python
- 📝 How to handle CSV files for saving and loading data
- 📝 How to implement different functionality like login, withdraw and transfer
- 📝 How to unit test multiple classes and think of all possible cases 
- 📝 Overdraft protection logic
- 📝 Error and exception handling 
- 📝 Building a Command-Line Interface (CLI) to interact with the banking system
+ - 📝 How to use OOP in python
+ - 📝 How to handle CSV files for saving and loading data
+ - 📝 How to implement different functionality like login, withdraw and transfer
+ - 📝 How to unit test multiple classes and think of all possible cases 
+ - 📝 Overdraft protection logic
+ - 📝 Error and exception handling 
+ - 📝 Building a Command-Line Interface (CLI) to interact with the banking system
