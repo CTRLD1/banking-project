@@ -22,7 +22,9 @@ def main():
             frst_name = input('Enter your first name: ')
             last_name= input('Enter your last name: ')
             password = input('Enter password: ')
-            customer = bank.add_customer(frst_name, last_name, password)
+            savings_choice=input('Do you want a savings account? (yes/no): ')
+            has_savings = savings_choice == 'yes'
+            customer = bank.add_customer(frst_name, last_name, password, has_savings=has_savings)
             print('customer added successfully!')
 
         elif choice == '2':

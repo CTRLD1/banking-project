@@ -12,18 +12,23 @@ class BankSystem:
         with open(self.file_path, 'r') as f:
             reader = csv.DictReader(f)
             for row in reader:
+
+                has_savings = row.get('status_savings', 'active') != 'no_savings'
                 c = Customer(
                     int(row['account_id']),
                     row['frst_name'].strip(),
                     row['last_name'].strip(),
                     row['password'].strip(),
                     has_checking=True,
-                    has_savings=True,
+                    has_savings=has_savings,
                 )
                 c.checking.balance = float(row['balance_checking'])
-                c.savings.balance= float(row['balance_savings'])
                 c.checking.is_active = row.get('status_checking', 'active') == 'active'
-                c.savings.is_active = row.get('status_savings', 'active') == 'active'
+
+                if has_savings:
+                    c.savings.balance= float(row['balance_savings'])
+                    c.savings.is_active = row.get('status_savings', 'active') == 'active'
+
                 customers.append(c)
         return customers
     
@@ -42,15 +47,15 @@ class BankSystem:
                     c.checking.balance if c.checking else 0,
                     c.savings.balance if c.savings else 0,
                     'active' if c.checking and c.checking.is_active else 'inactive',
-                    'active' if c.savings and c.savings.is_active else 'inactive',
+                    'active' if c.savings and c.savings.is_active else 'inactive' if c.savings else 'no_savings'
                 ])
 
 
      # add_customer method
-    def add_customer(self, frst_name, last_name, password, save_to_file=True):
+    def add_customer(self, frst_name, last_name, password, has_savings=True, save_to_file=True):
         new_account_id = max(c.account_id for c in self.customers) + 1 if self.customers else 10001
 
-        new_customer = Customer(new_account_id, frst_name, last_name, password, has_checking=True, has_savings=True)
+        new_customer = Customer(new_account_id, frst_name, last_name, password, has_checking=True, has_savings=has_savings)
 
         self.customers.append(new_customer)
         if save_to_file:
@@ -60,7 +65,7 @@ class BankSystem:
                             new_customer.checking.balance if new_customer.checking else 0,
                             new_customer.savings.balance if new_customer.savings else 0,
                             'active' if new_customer.checking and new_customer.checking.is_active else 'inactive',
-                            'active' if new_customer.savings and new_customer.savings.is_active else 'inactive',])
+                            'active' if new_customer.savings and new_customer.savings.is_active else 'inactive' if new_customer.savings else 'no_savings'])
         return new_customer
     
 
