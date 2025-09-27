@@ -9,7 +9,7 @@ This project is a simple banking system built with python. It allows users to:
 - 💸 Automatically update the data in a CSV file
 
 
-## Exaample of code
+## Example of code
 Here is a snippet of the update_csv method that keeps the customer data updated!
 ```python
 def update_csv(self):
