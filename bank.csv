@@ -2,7 +2,9 @@ account_id,frst_name,last_name,password,balance_checking,balance_savings,status_
 10001,suresh,sigera,juagw362,1000.0,10000.0,active,active
 10002,james,taylor,idh36%@#FGd,9800.0,10000.0,active,active
 10003,melvin,gordon,uYWE732g4ga1,2000.0,20000.0,active,active
-10004,stacey,abrams,DEU8_qw3y72$,2000.0,20000.0,active,active
-10005,jake,paul,d^dg23g)@,99000.0,100000.0,active,active
-10006,Danah,Alsubaie,d1234,3000.0,1000.0,active,active
+10004,stacey,abrams,DEU8_qw3y72$,2000.0,19500.0,active,active
+10005,jake,paul,d^dg23g)@,100500.0,100500.0,active,active
+10006,Danah,Alsubaie,d1234,2400.0,1550.0,active,active
 10007,Sami,Alsubaie,345A,3500.0,-125.0,active,inactive
+10008,George,Jones,123,3000.0,-125.0,active,inactive
+10009,Bruno,Mars,24K,0.0,0.0,active,active
