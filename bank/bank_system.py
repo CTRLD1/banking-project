@@ -51,15 +51,26 @@ class BankSystem:
                 ])
 
 
-     # add_customer method
+    # add_customer method
     def add_customer(self, frst_name, last_name, password, has_savings=True, save_to_file=True):
-        new_account_id = max(c.account_id for c in self.customers) + 1 if self.customers else 10001
+        existing_ids =[]
+        try:
+            with open(self.file_path, 'r') as f:
+                reader = csv.reader(f)
+                next(reader)
+                for row in reader:
+                    if row and row[0].isdigit():
+                        existing_ids.append(int(row[0]))
+        except FileNotFoundError:
+            pass
+
+        new_account_id = max(existing_ids, default=10000) + 1
 
         new_customer = Customer(new_account_id, frst_name, last_name, password, has_checking=True, has_savings=has_savings)
 
         self.customers.append(new_customer)
         if save_to_file:
-            with open(self.file_path, 'a', newline='') as f:
+            with open(self.file_path, 'a', newline='', encoding='utf-8') as f:
                  writer = csv.writer(f)
                  writer.writerow([new_customer.account_id, new_customer.frst_name, new_customer.last_name, new_customer.password,
                             new_customer.checking.balance if new_customer.checking else 0,
