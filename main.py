@@ -3,9 +3,11 @@ from termcolor import colored
 from alive_progress import alive_bar
 import time
 import pyfiglet
+import pwinput
 
 GREEN = '\033[92m'
 RESET = '\033[0m'
+
 # sources:pypi.org & youtube toturial
 
 def banner():
@@ -38,7 +40,7 @@ def main():
         if choice == '1':
             frst_name = input('Enter your first name: ')
             last_name= input('Enter your last name: ')
-            password = input('Enter password: ')
+            password = pwinput.pwinput(prompt='Enter password: ', mask='*')
             savings_choice=input('Do you want a savings account? (yes/no): ')
             has_savings = savings_choice == 'yes'
 
@@ -46,7 +48,7 @@ def main():
             print(GREEN, end="")
             with alive_bar(100, bar='smooth', length=20) as bar:
                 for _ in range(100):
-                    time.sleep(0.01)
+                    time.sleep(0.05)
                     bar()
             print(RESET)
             customer = bank.add_customer(frst_name, last_name, password, has_savings=has_savings)
@@ -69,7 +71,7 @@ def main():
         elif choice == '2':
             try:
                 account_id = int(input('Enter account ID: '))
-                password = input('Enter password: ')
+                password = pwinput.pwinput(prompt='Enter password: ', mask='*')
                 account_type = input('choose account type (checking/savings): ')
                 amount = float(input('Enter amount: '))
 
@@ -77,7 +79,7 @@ def main():
                 print(GREEN, end="")
                 with alive_bar(100, bar='smooth', length=20) as bar:
                   for _ in range(100):
-                    time.sleep(0.01)
+                    time.sleep(0.05)
                     bar()
                 print(RESET)
 
@@ -91,7 +93,7 @@ def main():
         elif choice == '3':
             try:
                 account_id = int(input('account ID: '))
-                password = input('Enter password: ')
+                password = pwinput.pwinput(prompt='Enter password: ', mask='*')
                 account_type = input('choose account type (checking/savings): ')
                 amount = float(input('Enter amount: '))
 
@@ -99,7 +101,7 @@ def main():
                 print(GREEN, end="")
                 with alive_bar(100, bar='smooth', length=20) as bar:
                   for _ in range(100):
-                    time.sleep(0.01)
+                    time.sleep(0.05)
                     bar()
                 print(RESET)
 
@@ -113,7 +115,7 @@ def main():
         elif choice == '4':
             try:
                 sender_id = int(input('sender ID: '))
-                password = input('Enter password: ')
+                password = pwinput.pwinput(prompt='Enter password: ', mask='*')
                 sender_type = input('sender account: (checking/savings): ')
                 receiver_id = int(input('receiver ID: '))
                 receiver_type = input('receiver account: (checking/savings): ')
@@ -123,7 +125,7 @@ def main():
                 print(GREEN, end="")
                 with alive_bar(100, bar='smooth', length=20) as bar:
                   for _ in range(100):
-                    time.sleep(0.01)
+                    time.sleep(0.05)
                     bar()
                 print(RESET)
 
@@ -137,7 +139,7 @@ def main():
         elif choice == '5':
             try:
                 account_id = int(input('account ID: '))
-                password = input('Enter password: ')
+                password = pwinput.pwinput(prompt='Enter password: ', mask='*')
                 customer = bank.login(account_id, password)
                 if not customer:
                     raise ValueError('Invalid login')
@@ -149,7 +151,7 @@ def main():
                 print(GREEN, end="")
                 with alive_bar(100, bar='smooth', length=20) as bar:
                   for _ in range(100):
-                    time.sleep(0.01)
+                    time.sleep(0.05)
                     bar()
                 print(RESET)
 
